@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('load/header.html')
+    fetch('header.html')
         .then(response => response.text())
         .then(data => {
             document.querySelector('header').outerHTML = data;
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('theme', theme);
             });
         });
-    fetch('load/footer.html')
+    fetch('footer.html')
         .then(response => response.text())
         .then(data => {
             document.querySelector('footer').innerHTML = data;

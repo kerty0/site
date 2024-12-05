@@ -1,27 +1,38 @@
 header
     h1
-        a(href="/")="My Cat"
+        a(href='/home')='My Cat'
 nav
-    a.logo(href="/")="My cat"
-    a(href="home")="Home"
-    a(href="contact")="Contact"
-    a(href="about")="About"
-    div(style="flex-grow: 1;")
-    button.theme-toggle="🌓︎"
+    a.logo(href='/home')='My cat'
+    a(href='/home')='Home'
+    a(href='/contact')='Contact'
+    a(href='/about')='About'
+    div(style='flex-grow: 1;')
+    button.theme-toggle='🌓︎'
     script.
-        let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
         document.querySelector('.theme-toggle').addEventListener('click', () => {
-            theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         });
         let logo = document.querySelector('.logo');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 97) {
-                logo.classList.add("logo-animated")
+            if (window.scrollY > 100) {
+                logo.classList.add('logo-animated')
             } else {
-                logo.classList.remove("logo-animated")
+                logo.classList.remove('logo-animated')
             }
-        })
+        });
+        let prefetchedUrls = new Set();
+        // let prefetchedUrls = new Set([window.location.href]);
+        document.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('mouseover', () => {
+                if (!prefetchedUrls.has(link.href)) {
+                    let prefetchLink = document.createElement('link');
+                    prefetchLink.href = link.href;
+                    prefetchLink.rel = 'prefetch';
+                    document.head.append(prefetchLink);
+                    prefetchedUrls.add(link.href);
+                }
+            }, {once: true});
+        });
 

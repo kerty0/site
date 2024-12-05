@@ -15,7 +15,8 @@ app.set('view engine', 'pug')
 // app.use(express.json());
 
 app.use(compression())
-app.use(favicon(dir('favicon.ico')));
+// app.use(favicon(dir('favicon.ico')));
+// app.use(favicon('public/favicon.ico'));
 app.use('/static', express.static('public'))
 
 app.get('/', (req, res) => {

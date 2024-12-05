@@ -1,0 +1,27 @@
+header
+    h1
+        a(href="/")="My Cat"
+nav
+    a.logo(href="/")="My cat"
+    a(href="home")="Home"
+    a(href="contact")="Contact"
+    a(href="about")="About"
+    div(style="flex-grow: 1;")
+    button.theme-toggle="🌓︎"
+    script.
+        let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelector('.theme-toggle').addEventListener('click', () => {
+            theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+        let logo = document.querySelector('.logo');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 97) {
+                logo.classList.add("logo-animated")
+            } else {
+                logo.classList.remove("logo-animated")
+            }
+        })
+

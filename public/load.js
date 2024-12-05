@@ -7,7 +7,7 @@ if (theme) {
     document.documentElement.setAttribute('data-theme', 'light');
 }
 
-let header = fetch('header.html', {cache: "force-cache"})
+let header = fetch('header.html')
     .then(response => response.text())
     .then(data => {
         document.querySelector('.header').outerHTML = data;
@@ -18,7 +18,7 @@ let header = fetch('header.html', {cache: "force-cache"})
         });
     });
 
-let footer = fetch('footer.html', {cache: "force-cache"})
+let footer = fetch('footer.html')
     .then(response => response.text())
     .then(data => {
         document.querySelector('.footer').outerHTML = data;

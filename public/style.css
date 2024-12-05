@@ -7,8 +7,10 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    transition: ease-in-out 0.3s;
 }
 
+/*
 .loading {
     visibility: hidden;
 }
@@ -16,6 +18,7 @@ body {
 .header {
     height: 138px;
 }
+*/
 
 header {
     font-family: "Pixelify Sans", sans-serif;
@@ -46,19 +49,22 @@ nav {
     top: 0;
     height: 41px;
     padding: 0 calc(25vw - 100px);
+    transition: ease-in-out 0.3s;
 
     a {
         padding: 10px 20px;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
-        background-color: inherit;
+        background-color: transparent;
         color: black;
+        transition: ease-in-out 0.3s;
     }
 
     a:hover {
         background-color: #639;
         color: white;
+        /*transition: ease-in-out 0.3s;*/
     }
 
     button {
@@ -71,6 +77,7 @@ nav {
         flex-shrink: 0;
         background-color: white;
         color: #191919;
+        transition: ease-in-out 0.3s;
     }
 
     button:hover {
@@ -79,7 +86,10 @@ nav {
     }
 
     .logo {
+        width: 0;
         margin: 0;
+        padding: 10px 0 10px 20px;
+        overflow: hidden;
         white-space: nowrap;
     }
 
@@ -87,25 +97,27 @@ nav {
         background-color: transparent;
         color: #639;
     }
-}
 
-@keyframes logo {
-    from {
-        width: 0;
-        padding: 10px 0 10px 20px;
-    }
-    to {
+    .logo-animated {
         width: 6ch;
         padding: 10px 10px 10px 20px;
+        transition: ease-in-out 0.3s;
     }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    nav .logo {
-        animation: logo ease-in-out both;
-        animation-duration: 0.5s;
-    }
-}
+/*@keyframes logo {*/
+/*    to {*/
+/*        width: 6ch;*/
+/*        padding: 10px 10px 10px 20px;*/
+/*    }*/
+/*}*/
+
+/*@media (prefers-reduced-motion: no-preference) {*/
+/*    nav .logo-animated {*/
+/*        animation: ease-in-out both;*/
+/*        animation-duration: 0.5s;*/
+/*    }*/
+/*}*/
 
 main {
     padding: 10px max(25vw - 100px + 20px, 20px) 60px;
@@ -127,6 +139,15 @@ main {
     .title h1 {
         margin: 20px 20px;
         white-space: nowrap;
+    }
+
+    .title a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .title a:hover {
+        color: #639;
     }
 
     img {

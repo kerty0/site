@@ -22,46 +22,44 @@ html
             block main
         include footer
         script.
+            window.addEventListener('resize', () => {
+                let img = document.querySelector('.view');
+                if (img) {
+                    if (window.innerWidth / window.innerHeight > img.naturalWidth / img.naturalHeight) {
+                        img.style.height = '100%';
+                        img.style.width = '';
+                    } else {
+                        img.style.width = '100%';
+                        img.style.height = '';
+                    }
+                }
+            });
+            window.addEventListener('keydown', (event) => {
+                let img = document.querySelector('.view');
+                if (img) {
+                    if (event.key === 'Escape') {
+                        closeViewer(img);
+                    }
+                }
+            });
+            function closeViewer(img) {
+                img.classList.remove('view')
+                img.parentElement.classList.remove('background-active')
+                img.style.width = '';
+                img.style.height = '';
+            }
+            const maxImgHeight = `${window.outerHeight * 0.5}px`;
             document.querySelectorAll('main img').forEach((img) => {
-                img.style.maxHeight = `${window.outerHeight * 0.5}px`;
+                img.outerHTML = `<div class="imgbox" style="height: min(${img.naturalHeight}px, ${maxImgHeight})"><div class="background">${img.outerHTML}</div></div>`;
+            });
+            document.querySelectorAll('main img').forEach((img) => {
                 img.addEventListener('click', () => {
                     if (document.querySelector('.view')) {
-                        return;
+                        closeViewer(img)
+                    } else {
+                        img.classList.add('view');
+                        img.parentElement.classList.add('background-active')
+                        window.dispatchEvent(new CustomEvent('resize'));
                     }
-
-                    let viewDiv = document.createElement('div');
-                    viewDiv.classList.add('view');
-                    let viewImg = document.createElement('img');
-                    viewImg.src = img.src;
-                    viewImg.alt = img.alt;
-                    viewDiv.appendChild(viewImg);
-                    resizeImg();
-                    document.body.appendChild(viewDiv);
-
-                    function resizeImg() {
-                        if (window.innerWidth / window.innerHeight > viewImg.naturalWidth / viewImg.naturalHeight) {
-                            viewImg.style.height = '100%';
-                            viewImg.style.width = '';
-                        } else {
-                            viewImg.style.width = '100%';
-                            viewImg.style.height = '';
-                        }
-                    }
-
-                    function closeViewer() {
-                        document.body.removeChild(viewDiv);
-                        document.removeEventListener('keydown', handleEscape);
-                        document.removeEventListener('resize', resizeImg);
-                    }
-
-                    function handleEscape(event) {
-                        if (event.key === 'Escape') {
-                            closeViewer();
-                        }
-                    }
-
-                    window.addEventListener('resize', resizeImg);
-                    document.addEventListener('keydown', handleEscape);
-                    viewDiv.addEventListener('click', closeViewer);
                 });
             });

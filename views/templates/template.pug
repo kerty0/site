@@ -6,12 +6,6 @@ html
             meta(name="viewport" content="width=device-width, initial-scale=1.0")
             title="My cat"
             link(rel="icon" href="static/favicon.ico")
-            //link(rel="preconnect" href="https://fonts.googleapis.com")
-            //link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
-            //link(href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet")
-            //link(rel="prefetch" href="home")
-            //link(rel="prefetch" href="about")
-            //link(rel="prefetch" href="contact")
             script.
                 let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                 document.documentElement.setAttribute('data-theme', theme);
@@ -34,27 +28,40 @@ html
                     if (document.querySelector('.view')) {
                         return;
                     }
+
                     let viewDiv = document.createElement('div');
                     viewDiv.classList.add('view');
                     let viewImg = document.createElement('img');
                     viewImg.src = img.src;
                     viewImg.alt = img.alt;
                     viewDiv.appendChild(viewImg);
+                    resizeImg();
                     document.body.appendChild(viewDiv);
+
+                    function resizeImg() {
+                        if (window.innerWidth / window.innerHeight > viewImg.naturalWidth / viewImg.naturalHeight) {
+                            viewImg.style.height = '100%';
+                            viewImg.style.width = '';
+                        } else {
+                            viewImg.style.width = '100%';
+                            viewImg.style.height = '';
+                        }
+                    }
 
                     function closeViewer() {
                         document.body.removeChild(viewDiv);
                         document.removeEventListener('keydown', handleEscape);
-                    };
+                        document.removeEventListener('resize', resizeImg);
+                    }
 
                     function handleEscape(event) {
                         if (event.key === 'Escape') {
                             closeViewer();
                         }
-                    };
+                    }
 
+                    window.addEventListener('resize', resizeImg);
                     document.addEventListener('keydown', handleEscape);
                     viewDiv.addEventListener('click', closeViewer);
                 });
-                // img.addEventLi
             });

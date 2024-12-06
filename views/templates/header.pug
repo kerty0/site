@@ -22,8 +22,7 @@ nav
                 logo.classList.remove('logo-animated')
             }
         });
-        let prefetchedUrls = new Set();
-        // let prefetchedUrls = new Set([window.location.href]);
+        let prefetchedUrls = new Set([window.location.href]);
         document.querySelectorAll('a').forEach((link) => {
             link.addEventListener('mouseover', () => {
                 if (!prefetchedUrls.has(link.href)) {
@@ -35,4 +34,3 @@ nav
                 }
             }, {once: true});
         });
-

@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 // const expressCache = require('cache-express')
 const favicon = require('express-favicon')
@@ -11,12 +13,8 @@ function dir(path) {
 
 app.set('view engine', 'pug')
 // app.enable('view cache')
-
 // app.use(express.json());
-
 app.use(compression())
-// app.use(favicon(dir('favicon.ico')));
-// app.use(favicon('public/favicon.ico'));
 app.use('/static', express.static('public'))
 
 app.get('/', (req, res) => {
@@ -34,10 +32,6 @@ app.get('/contact', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about');
 });
-
-// app.use(function (req, res) {
-//     console.log(res)
-// });
 
 app.use((req, res) => {
     res.render('empty')

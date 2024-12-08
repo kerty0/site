@@ -7,12 +7,17 @@ nav
     a(href='/contact')='Contact'
     a(href='/about')='About'
     div(style='flex-grow: 1;')
-    button.theme-toggle='🌓︎'
+    button.theme-toggle
+        img
     script.
-        document.querySelector('.theme-toggle').addEventListener('click', () => {
+        let themeToggle = document.querySelector('.theme-toggle');
+        let themeImg = themeToggle.firstElementChild;
+        themeImg.src = `/static/${document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'}-mode.png`;
+        themeToggle.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
+            themeImg.src = `/static/${theme === 'dark' ? 'light' : 'dark'}-mode.png`;
         });
         let logo = document.querySelector('.logo');
         window.addEventListener('scroll', () => {

@@ -1,17 +1,17 @@
 @font-face {
     font-family: "JetBrains Mono";
-    src: url('../static/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+    src: url('/static/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Pixelify Sans";
-    src: url('../static/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf') format('truetype');
+    src: url('/static/fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
 }
 
 body {
@@ -62,11 +62,11 @@ nav {
         background-color: transparent;
         color: black;
         transition: ease-in-out 0.3s;
-    }
 
-    a:hover {
-        background-color: #639;
-        color: white;
+        &:hover {
+            background-color: #639;
+            color: white;
+        }
     }
 
     button {
@@ -83,16 +83,16 @@ nav {
         background-color: #aaa;
         color: #191919;
         transition: ease-in-out 0.3s;
-    }
 
-    button:hover {
-        background-color: #888;
-        color: white;
-    }
+        &:hover {
+            background-color: #888;
+            color: white;
+        }
 
-    button img {
-        max-width: 90%;
-        max-height: 90%;
+        img {
+            max-width: 90%;
+            max-height: 90%;
+        }
     }
 
     .logo {
@@ -101,17 +101,17 @@ nav {
         padding: 10px 0;
         overflow: hidden;
         white-space: nowrap;
-    }
 
-    .logo:hover {
-        background-color: transparent;
-        color: #639;
-    }
+        &:hover {
+            background-color: transparent;
+            color: #639;
+        }
 
-    .logo-animated {
-        width: 6ch;
-        padding: 10px 10px 10px 0;
-        transition: ease-in-out 0.3s;
+        &.logo-animated {
+            width: 6ch;
+            padding: 10px 10px 10px 0;
+            transition: ease-in-out 0.3s;
+        }
     }
 }
 
@@ -123,66 +123,55 @@ main {
     .title {
         display: flex;
         align-items: center;
+
+        div {
+            width: 1ch;
+            height: 0;
+            border: 4px solid rebeccapurple;
+            border-radius: 4px;
+        }
+
+        a {
+            margin: 0 1ch;
+            color: black;
+            white-space: nowrap;
+            text-decoration: none;
+
+            &:hover {
+                color: #639;
+            }
+        }
     }
-
-    .title div {
-        width: 1ch;
-        height: 0;
-        border: 4px solid rebeccapurple;
-        border-radius: 4px;
-    }
-
-    .title h1 {
-        margin: 20px 20px;
-        white-space: nowrap;
-    }
-
-    .title a {
-        color: black;
-        text-decoration: none;
-    }
-
-    .title a:hover {
-        color: #639;
-    }
-
-    .imgbox {
-        max-width: 100%;
-        align-self: center;
-    }
-
-    .background {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        max-height: inherit;
-    }
-
-    .background-active {
-        position: fixed;
-        max-height: none;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: #000a;
-        pointer-events: none;
-    }
-
-
 
     img {
         max-width: 100%;
-        max-height: inherit;
+        max-height: 50vh;
+        align-self: center;
         border-radius: 4px;
+        object-fit: contain;
     }
+}
 
-    .view {
+.imgViewer {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000a;
+    pointer-events: none;
+
+    img {
         max-width: 90%;
         max-height: 90%;
         background: black;
+        border: 2px solid #639;
+        border-radius: 4px;
         image-rendering: pixelated;
-        border: 2px solid rebeccapurple;
         pointer-events: auto;
     }
 }
@@ -195,7 +184,6 @@ footer {
     margin-top: auto;
     white-space: nowrap;
 }
-
 
 html[data-theme="dark"] {
     body {
@@ -222,13 +210,19 @@ html[data-theme="dark"] {
         }
     }
 
-    main .title a {
-        color: white;
-    }
+    main {
+        .title a {
+            color: white;
 
-    textarea {
-        color: white;
-        background-color: #191919;
+            &:hover {
+                color: #639;
+            }
+        }
+
+        textarea {
+            color: white;
+            background-color: #191919;
+        }
     }
 }
 

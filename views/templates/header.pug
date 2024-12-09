@@ -9,24 +9,24 @@ nav
     div(style='flex-grow: 1;')
     button.theme-toggle
         img
+        script.
+            let themeImg = document.querySelector('.theme-toggle img');
+            themeImg.src = `/static/images/${document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'}-mode.png`;
+            themeImg.parentElement.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                themeImg.src = `/static/images/${theme === 'dark' ? 'light' : 'dark'}-mode.png`;
+            });
+            let logo = document.querySelector('.logo');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    logo.classList.add('logo-animated')
+                } else {
+                    logo.classList.remove('logo-animated')
+                }
+            });
     script.
-        let themeToggle = document.querySelector('.theme-toggle');
-        let themeImg = themeToggle.firstElementChild;
-        themeImg.src = `/static/${document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'}-mode.png`;
-        themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            themeImg.src = `/static/${theme === 'dark' ? 'light' : 'dark'}-mode.png`;
-        });
-        let logo = document.querySelector('.logo');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                logo.classList.add('logo-animated')
-            } else {
-                logo.classList.remove('logo-animated')
-            }
-        });
         let prefetchedUrls = new Set([window.location.href]);
         document.querySelectorAll('a').forEach((link) => {
             link.addEventListener('mouseover', () => {

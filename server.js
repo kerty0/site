@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(compression())
 app.use((req, res, next) => {
     if (req.url.startsWith('/static')) {
-        // res.set('Cache-Control', 'public, max-age=31536000');
+        res.set('Cache-Control', 'public, max-age=31536000');
     }
     next();
 })

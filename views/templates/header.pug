@@ -1,30 +1,71 @@
 header
     h1
         a(href='/home')='My Cat'
+
 nav
-    a.logo(href='/home')='My cat'
-    a(href='/home')='Home'
-    a(href='/contact')='Contact'
-    a(href='/about')='About'
+    button#menu
+        <p>☰</p>
+        div#menuSelector
+            a(href='/home')='Home'
+            a(href='/contact')='Contact'
+            a(href='/about')='About'
+        script.
+            let menu = document.querySelector('#menuSelector');
+            console.log(menu.parentElement.textContent);
+            window.addEventListener('scroll', () => {
+                menu.style.height = `min(100vh, ${document.body.scrollHeight - 138}px)`;
+            });
+            window.dispatchEvent(new CustomEvent('scroll'));
+            window.addEventListener('resize', () => {
+                if (window.innerWidth <= 572) {
+                    menu.parentElement.parentElement.classList.add('active');
+                    menu.parentElement.firstElementChild.text = '⛌';
+                } else {
+                    menu.parentElement.parentElement.classList.remove('active');
+                    menu.classList.remove('active');
+                    menu.parentElement.firstElementChild.textContent = '☰';
+                }
+            });
+            window.dispatchEvent(new CustomEvent('resize'));
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    menu.classList.remove('active');
+                    menu.parentElement.firstElementChild.textContent = '☰';
+                }
+            });
+            menu.parentElement.addEventListener('click', () => {
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    menu.parentElement.firstElementChild.textContent = '☰';
+                } else {
+                    menu.classList.add('active');
+                    menu.parentElement.firstElementChild.textContent = '⛌';
+                }
+            });
+    a#logo(href='/home')='My cat'
+        script.
+            let logo = document.querySelector('#logo');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 80) {
+                    logo.classList.add('active');
+                } else {
+                    logo.classList.remove('active');
+                }
+            });
+    a.navElement(href='/home')='Home'
+    a.navElement(href='/contact')='Contact'
+    a.navElement(href='/about')='About'
     div(style='flex-grow: 1;')
-    button.theme-toggle
+    button#theme-toggle
         img
         script.
-            let themeImg = document.querySelector('.theme-toggle img');
+            let themeImg = document.querySelector('#theme-toggle img');
             themeImg.src = `/static/images/${document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'}-mode.png`;
             themeImg.parentElement.addEventListener('click', () => {
                 let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
                 document.documentElement.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
                 themeImg.src = `/static/images/${theme === 'dark' ? 'light' : 'dark'}-mode.png`;
-            });
-            let logo = document.querySelector('.logo');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    logo.classList.add('logo-animated')
-                } else {
-                    logo.classList.remove('logo-animated')
-                }
             });
     script.
         let prefetchedUrls = new Set([window.location.href]);
@@ -39,3 +80,4 @@ nav
                 }
             }, {once: true});
         });
+

@@ -1,68 +1,14 @@
 doctype html
 html
-    head
-        block headers
-            meta(charset="UTF-8")
-            meta(name="viewport" content="width=device-width, initial-scale=1.0")
-            meta(name="referrer" content="origin")
-            title="My cat"
-            link(rel="icon" href="static/images/favicon.ico")
-            link(rel="stylesheet" href="static/style.css?v=1")
-            script.
-                document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') ||
-                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-    body
+    include head
+    body.loading
         include header
         main
-            div.title
+            div#title
                 div
                 h1
                     block title
                 div(style="flex-grow: 1")
             block main
         include footer
-        div.imgViewer
-            img
-            script.
-                let viewedImg;
-                let viewImg = document.querySelector('.imgViewer img');
-                window.addEventListener('resize', () => {
-                    if (viewedImg) {
-                        if (window.innerWidth / window.innerHeight > viewImg.naturalWidth / viewImg.naturalHeight) {
-                            viewImg.style.height = '100%';
-                            viewImg.style.width = '';
-                        } else {
-                            viewImg.style.width = '100%';
-                            viewImg.style.height = '';
-                        }
-                    }
-                });
-                window.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape') {
-                        closeViewer();
-                    }
-                });
-                viewImg.addEventListener('click', () => {
-                    closeViewer();
-                })
-                function closeViewer() {
-                    if (viewedImg) {
-                        viewImg.src = '';
-                        viewImg.alt = '';
-                        viewImg.parentElement.style.visibility = '';
-                        viewedImg.style.visibility = '';
-                        viewedImg = undefined;
-                    }
-                }
-                document.querySelectorAll('main img').forEach((img) => {
-                    img.addEventListener('click', () => {
-                        if (!viewedImg) {
-                            viewImg.src = img.src;
-                            viewImg.alt = img.alt;
-                            viewImg.parentElement.style.visibility = 'visible';
-                            viewedImg = img;
-                            viewedImg.style.visibility = 'hidden';
-                            window.dispatchEvent(new CustomEvent('resize'));
-                        }
-                    });
-                });
+        include imgViewer

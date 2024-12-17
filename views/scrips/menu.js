@@ -7,12 +7,13 @@ window.addEventListener('scroll', () => {
 window.dispatchEvent(new CustomEvent('scroll'));
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth <= 572) {
+    if (window.innerWidth <= 572 && !menu.parentElement.classList.contains('activeMenu')) {
         menu.parentElement.classList.add('activeMenu');
-    } else {
+        menu.textContent = '☰';
+    } else if (window.innerWidth > 572 && menu.parentElement.classList.contains('activeMenu')) {
         menu.parentElement.classList.remove('activeMenu');
         menuSelector.classList.remove('activeMenu');
-        menu.textContent = '☰';
+        menu.classList.remove('activeMenu');
     }
 });
 window.dispatchEvent(new CustomEvent('resize'));
@@ -25,7 +26,6 @@ window.addEventListener('keydown', (event) => {
 });
 
 menu.addEventListener('click', () => {
-    console.log(menu);
     if (menu.classList.contains('activeMenu')) {
         menuSelector.classList.remove('activeMenu');
         menu.classList.remove('activeMenu');
@@ -33,7 +33,7 @@ menu.addEventListener('click', () => {
     } else {
         menuSelector.classList.add('activeMenu');
         menu.classList.add('activeMenu');
-        menu.textContent = '⛌';
+        menu.textContent = '✕';
         console.log(2);
     }
 });

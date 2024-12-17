@@ -6,18 +6,15 @@ block title
 block main
     form#contactForm
         label(for="name") Name:
-        input#name(type="text" name="name" required)
-        div.error#nameError
-
-        label(for="email") Email:
-        input#email(type="email" name="email" required)
-        div.error#emailError
+        input#name(type="text" name="name" placeholder="Enter your name" required)
 
         label(for="message") Message:
-        textarea#message(name="message" rows=4 required)
-        div.error#messageError
+        textarea#message(name="message" placeholder="Enter your message" rows=10  required)
 
-        div.formButtons
-            button(type="clear") Clear
-            button(type="submit") Submit
-        div.formMessage
+        div#formBottom
+            div#formMessage
+            div#formButtons
+                button#clear(type="reset") Clear
+                button#submit(type="submit") Submit
+    script
+        include scrips/form.js

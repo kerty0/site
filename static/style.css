@@ -86,17 +86,17 @@ nav {
     #menuSelector {
         position: absolute;
         top: 41px;
-        left: min(-25vw + 100px - 145px, -145px);
+        left: min(-25vw + 100px - 150px, -150px);
         display: flex;
         visibility: hidden;
         flex-direction: column;
-        width: max(25vw - 100px + 145px, 145px);
+        width: max(25vw - 100px + 150px, 150px);
         transition: background-color ease-in-out 0.3s, left ease-in-out 0.3s, color ease-in-out 0.3s;
         background-color: #888;
 
         a {
             font-weight: bold;
-            padding: 10px 0 10px max(25vw - 100px + 20px, 20px);
+            padding: 15px 0 15px max(25vw - 100px + 20px, 20px);
             text-align: left;
             text-decoration: none;
             background-color: transparent;
@@ -247,41 +247,73 @@ main {
 
     form {
         display: flex;
+        align-self: center;
         flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        margin-top: 40px;
         gap: 8px;
 
-        .formButtons {
+        #formBottom {
             display: flex;
-            margin-left: auto;
-            gap: 8px;
+            row-gap: 16px;
+            flex-wrap: wrap-reverse;
+            align-items: start;
 
-            button {
-                font-family: Pixelify Sans, sans-serif;
-                font-size: x-large;
-                color: white;
-                background-color: #639;
+            #formMessage {
+                margin: auto 4px;
+                white-space: pre-line;
+            }
+
+            #formButtons {
+                display: flex;
+                flex-wrap: wrap-reverse;
+                height: 31px;
+                justify-content: end;
+                margin-left: auto;
+                gap: 8px;
+
+
+                button {
+                    font-family: Pixelify Sans, sans-serif;
+                    font-size: x-large;
+                    width: 94px;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    background-color: #639;
+
+                    &:hover {
+                        color: black;
+                    }
+
+                    &:active {
+                        background-color: #639a;
+                    }
+                }
             }
         }
 
         label {
-            font-family: Pixelify Sans, sans-serif;
+            font-family: JetBrains Mono, monospace;
             font-size: x-large;
         }
 
         input, textarea {
             font-family: JetBrains Mono, monospace;
             font-size: large;
-            padding: 0;
+            padding: 4px 8px;
             border: #639 solid 1px;
             border-radius: 4px;
         }
 
         input {
-            text-align: center;
+            /* text-align: center; */
         }
 
         textarea {
             resize: vertical;
+
         }
     }
 }

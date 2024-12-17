@@ -126,7 +126,7 @@ nav {
         }
     }
 
-    #theme-toggle {
+    #themeToggle {
         display: flex;
         align-items: center;
         flex-shrink: 0;
@@ -245,6 +245,13 @@ main {
         border-radius: 4px;
         object-fit: contain;
     }
+
+    form {
+        button {
+            font-size: x-large;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+    }
 }
 
 #imgViewer {
@@ -307,7 +314,7 @@ html[data-theme="dark"] {
             color: white;
         }
 
-        #theme-toggle {
+        #themeToggle {
             color: white;
             border-style: inset;
             background-color: #191919;

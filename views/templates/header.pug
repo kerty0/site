@@ -9,75 +9,20 @@ nav
             a(href='/home')='Home'
             a(href='/contact')='Contact'
             a(href='/about')='About'
-        script.
-            let menu = document.querySelector('#menuSelector');
-            console.log(menu.parentElement.textContent);
-            window.addEventListener('scroll', () => {
-                menu.style.height = `min(100vh, ${document.body.scrollHeight - 138}px)`;
-            });
-            window.dispatchEvent(new CustomEvent('scroll'));
-            window.addEventListener('resize', () => {
-                if (window.innerWidth <= 572) {
-                    menu.parentElement.parentElement.classList.add('active');
-                    menu.parentElement.firstElementChild.text = '⛌';
-                } else {
-                    menu.parentElement.parentElement.classList.remove('active');
-                    menu.classList.remove('active');
-                    menu.parentElement.firstElementChild.textContent = '☰';
-                }
-            });
-            window.dispatchEvent(new CustomEvent('resize'));
-            window.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    menu.classList.remove('active');
-                    menu.parentElement.firstElementChild.textContent = '☰';
-                }
-            });
-            menu.parentElement.addEventListener('click', () => {
-                if (menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                    menu.parentElement.firstElementChild.textContent = '☰';
-                } else {
-                    menu.classList.add('active');
-                    menu.parentElement.firstElementChild.textContent = '⛌';
-                }
-            });
+        script
+            include ../scrips/menu.js
     a#logo(href='/home')='My cat'
-        script.
-            let logo = document.querySelector('#logo');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 80) {
-                    logo.classList.add('active');
-                } else {
-                    logo.classList.remove('active');
-                }
-            });
+        script
+            include ../scrips/logo.js
     a.navElement(href='/home')='Home'
     a.navElement(href='/contact')='Contact'
     a.navElement(href='/about')='About'
     div(style='flex-grow: 1;')
-    button#theme-toggle
+    button#themeToggle
         img
-        script.
-            let themeImg = document.querySelector('#theme-toggle img');
-            themeImg.src = `/static/images/${document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'}-mode.png`;
-            themeImg.parentElement.addEventListener('click', () => {
-                let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                themeImg.src = `/static/images/${theme === 'dark' ? 'light' : 'dark'}-mode.png`;
-            });
-    script.
-        let prefetchedUrls = new Set([window.location.href]);
-        document.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('mouseover', () => {
-                if (!prefetchedUrls.has(link.href)) {
-                    let prefetchLink = document.createElement('link');
-                    prefetchLink.href = link.href;
-                    prefetchLink.rel = 'prefetch';
-                    document.head.append(prefetchLink);
-                    prefetchedUrls.add(link.href);
-                }
-            }, {once: true});
-        });
+        script
+            include ../scrips/themeToggle.js
+    script
+        include ../scrips/prefetchUrls.js
+
 

@@ -2,7 +2,7 @@ let menu = document.querySelector('#menu');
 let menuSelector = document.querySelector('#menuSelector');
 
 window.addEventListener('scroll', () => {
-    menuSelector.style.height = `min(100vh, ${document.body.scrollHeight - 138}px)`;
+    menuSelector.style.height = `min(100vh, ${document.body.clientHeight - 138}px)`;
 });
 window.dispatchEvent(new CustomEvent('scroll'));
 

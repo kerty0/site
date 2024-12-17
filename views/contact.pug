@@ -4,7 +4,6 @@ block title
     a#contact(href="#contact") Contact
 
 block main
-    textarea(style="height: 10lh;")
     form#contactForm
         label(for="name") Name:
         input#name(type="text" name="name" required)
@@ -18,5 +17,7 @@ block main
         textarea#message(name="message" rows=4 required)
         div.error#messageError
 
-        button(type="submit") Submit
+        div.formButtons
+            button(type="clear") Clear
+            button(type="submit") Submit
         div.formMessage

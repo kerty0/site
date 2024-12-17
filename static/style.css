@@ -246,9 +246,42 @@ main {
     }
 
     form {
-        button {
-            font-family: "Pixelify Sans", sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .formButtons {
+            display: flex;
+            margin-left: auto;
+            gap: 8px;
+
+            button {
+                font-family: Pixelify Sans, sans-serif;
+                font-size: x-large;
+                color: white;
+                background-color: #639;
+            }
+        }
+
+        label {
+            font-family: Pixelify Sans, sans-serif;
             font-size: x-large;
+        }
+
+        input, textarea {
+            font-family: JetBrains Mono, monospace;
+            font-size: large;
+            padding: 0;
+            border: #639 solid 1px;
+            border-radius: 4px;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        textarea {
+            resize: vertical;
         }
     }
 }
@@ -343,9 +376,11 @@ html[data-theme="dark"] {
             }
         }
 
-        textarea {
-            color: white;
-            background-color: #191919;
+        form {
+            input, textarea {
+                color: white;
+                background-color: #191919;
+            }
         }
     }
 }

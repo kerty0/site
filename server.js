@@ -7,6 +7,10 @@ app.set('view engine', 'pug')
 app.use(express.json());
 app.use(compression())
 app.use((req, res, next) => {
+    if (req.url.endsWith('style.css?v=1')) {
+        next();
+        return;
+    }
     if (req.url.startsWith('/static')) {
         res.set('Cache-Control', 'public, max-age=31536000');
     }

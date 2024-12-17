@@ -34,6 +34,5 @@ menu.addEventListener('click', () => {
         menuSelector.classList.add('activeMenu');
         menu.classList.add('activeMenu');
         menu.textContent = '✕';
-        console.log(2);
     }
 });

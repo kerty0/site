@@ -288,7 +288,7 @@ main {
                     }
 
                     &:active {
-                        background-color: #639a;
+                        background-color: #6399;
                     }
                 }
             }
@@ -305,6 +305,7 @@ main {
             padding: 4px 8px;
             border: #639 solid 1px;
             border-radius: 4px;
+            transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
         }
 
         input {

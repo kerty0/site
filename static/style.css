@@ -39,10 +39,11 @@ header {
 
     a {
         cursor: default;
+        transition: color ease-in-out 0.2s;
         white-space: nowrap;
         text-decoration: underline;
         color: white;
-        transition: color ease-in-out 0.2s;
+
         &:hover {
             color: #2e1745;
         }
@@ -62,6 +63,7 @@ nav {
 
     #menu {
         font-size: x-large;
+        line-height: 32px;
         overflow: hidden;
         width: 0;
         min-width: 0;
@@ -79,10 +81,52 @@ nav {
         &:active {
             background-color: #888;
         }
+    }
 
-        p {
-            line-height: 32px;
-            margin: 0;
+    #menuSelector {
+        position: absolute;
+        top: 41px;
+        left: min(-25vw + 100px - 145px, -145px);
+        display: flex;
+        visibility: hidden;
+        flex-direction: column;
+        width: max(25vw - 100px + 145px, 145px);
+        transition: background-color ease-in-out 0.3s, left ease-in-out 0.3s, color ease-in-out 0.3s;
+        background-color: #888;
+
+        a {
+            font-weight: bold;
+            padding: 10px 0 10px max(25vw - 100px + 20px, 20px);
+            text-align: left;
+            text-decoration: none;
+            background-color: transparent;
+
+            &:hover {
+                color: white;
+                background-color: #639;
+            }
+        }
+    }
+
+    &.activeMenu {
+        #menu {
+            min-width: 32px;
+            margin-right: 5px;
+            transition: color ease-in-out 0.3s, background-color 0.2s, min-width ease-in-out 0.3s 0.4s, margin-right ease-in-out 0.3s 0.4s;
+        }
+
+        .navElement {
+            top: -50px;
+            padding: 0;
+            transition: color ease-in-out 0.3s, background-color ease-in-out 0.3s, top ease-in-out 0.5s, padding 0s 0.5s;
+        }
+
+        #menuSelector {
+            visibility: visible;
+
+            &.activeMenu {
+                left: 0;
+            }
         }
     }
 
@@ -99,7 +143,7 @@ nav {
             background-color: transparent;
         }
 
-        &.active {
+        &.activeLogo {
             min-width: 6ch;
             margin-right: 10px;
         }
@@ -161,51 +205,6 @@ nav {
             max-height: 90%;
         }
     }
-
-    &.active {
-        #menu {
-            min-width: 32px;
-            margin-right: 5px;
-            transition: color ease-in-out 0.3s, background-color 0.2s, min-width ease-in-out 0.3s 0.4s, margin-right ease-in-out 0.3s 0.4s;
-        }
-
-        .navElement {
-            top: -50px;
-            padding: 0;
-            transition: color ease-in-out 0.3s, background-color ease-in-out 0.3s, top ease-in-out 0.5s, padding 0s 0.5s;
-        }
-
-
-
-        #menuSelector {
-            position: absolute;
-            top: 41px;
-            left: min(-25vw + 100px - 145px, -145px);
-            display: flex;
-            flex-direction: column;
-            width: max(25vw - 100px + 145px, 145px);
-            transition: background-color ease-in-out 0.3s, left ease-in-out 0.3s, color ease-in-out 0.3s;
-            background-color: #888;
-
-            &.active {
-                left: 0;
-            }
-
-            a {
-                font-weight: bold;
-                padding: 10px 0 10px max(25vw - 100px + 20px, 20px);
-                text-align: left;
-                text-decoration: none;
-                /* color: white; */
-                background-color: transparent;
-
-                &:hover {
-                    color: white;
-                    background-color: #639;
-                }
-            }
-        }
-    }
 }
 
 
@@ -248,8 +247,8 @@ main {
 
     form {
         button {
-            font-size: x-large;
             font-family: "Pixelify Sans", sans-serif;
+            font-size: x-large;
         }
     }
 }

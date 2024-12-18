@@ -2,14 +2,14 @@ const express = require('express');
 const compression = require('compression')
 const fs = require('fs').promises;
 const app = express();
-const port = 3000;
+const port = process.env.NODE_ENV === "dev" ? 3000 : 80;
 const messages = "messages.json";
 
 app.set('view engine', 'pug')
 app.use(express.json());
 app.use(compression())
 app.use((req, res, next) => {
-    if (req.url.endsWith('style.css?v=1')) {
+    if (process.env.NODE_ENV === "dev"  && req.url.includes('style.css')) {
         next();
         return;
     }
@@ -23,10 +23,7 @@ app.use('/static', express.static('static'))
 async function readData() {
     try {
         const data = await fs.readFile(messages, 'utf8');
-        if (data.trim() === "") {
-            return { names: {} };
-        }
-        return JSON.parse(data);
+        return data.trim() === "" ? { names: {} } : JSON.parse(data);
     } catch (error) {
         if (error.code === 'ENOENT') {
             return { names: {} };
@@ -95,5 +92,5 @@ app.use((req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port} ${process.env.NODE_ENV || "prod"}`);
 });

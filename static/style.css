@@ -237,6 +237,10 @@ main {
         }
     }
 
+    p {
+        text-indent: 2ch;
+    }
+
     img {
         align-self: center;
         max-width: 100%;
@@ -256,9 +260,9 @@ main {
 
         #formBottom {
             display: flex;
-            row-gap: 16px;
-            flex-wrap: wrap-reverse;
             align-items: start;
+            flex-wrap: wrap-reverse;
+            row-gap: 16px;
 
             #formMessage {
                 margin: auto 4px;
@@ -268,8 +272,8 @@ main {
             #formButtons {
                 display: flex;
                 flex-wrap: wrap-reverse;
-                height: 31px;
                 justify-content: end;
+                height: 31px;
                 margin-left: auto;
                 gap: 8px;
 
@@ -303,13 +307,12 @@ main {
             font-family: JetBrains Mono, monospace;
             font-size: large;
             padding: 4px 8px;
+            transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
             border: #639 solid 1px;
             border-radius: 4px;
-            transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
         }
 
         input {
-            /* text-align: center; */
         }
 
         textarea {
